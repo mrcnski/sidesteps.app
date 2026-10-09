@@ -10,6 +10,10 @@ Sidesteps is a static Astro + Tailwind v4 site: a deck of problem-solving cues. 
 - Keep `src/utils` pure and unit-tested; put DOM code in `src/scripts` or component `<script>`s.
 - Cue ids are list positions and are stored in users' notebooks: append new cues, don't reorder or delete.
 
+## Dev server
+
+Astro 7 tracks the dev server in `.astro/dev.json`, and `astro dev stop` kills whichever server is recorded there, including one the user started in their terminal. When an agent needs a server (e.g. for screenshots), start a separate one with `npx astro dev --ignore-lock --port 4322` and stop it by its pid. Never run `astro dev stop`.
+
 ## Commit Messages
 
 First line format: `{area}: {concise description}` (e.g. `deck: add three cues`, `notebook: fix export`).
