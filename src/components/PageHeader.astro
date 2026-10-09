@@ -10,7 +10,7 @@ const { eyebrow, title, class: className } = Astro.props;
 
 <div class:list={['max-w-2xl', className]}>
   <p class="eyebrow">{eyebrow}</p>
-  <h1 class="mt-4 font-serif text-[clamp(2.5rem,6vw,3.75rem)] leading-[1.02] font-[440] tracking-[-0.02em] text-balance">
+  <h1 class="mt-4 font-display text-[clamp(2.5rem,6vw,3.75rem)] leading-[1.02] font-[640] tracking-[-0.02em] text-balance">
     {title}
   </h1>
   {Astro.slots.has('default') && (

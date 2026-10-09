@@ -8,10 +8,12 @@ const { class: className } = Astro.props;
 
 <div class:list={['@container', className]} aria-hidden="true">
   <div class="card-back relative aspect-5/7 w-full overflow-hidden rounded-[clamp(0.875rem,5cqi,1.375rem)] bg-back shadow-card">
-    <div class="card-back-frame absolute inset-[4.5cqi] rounded-[3cqi]"></div>
+    <div class="card-back-frame absolute inset-[4.5cqi] overflow-hidden rounded-[3cqi]">
+      <div class="card-back-dots absolute inset-0"></div>
+    </div>
     <div class="absolute inset-0 grid place-items-center">
-      <div class="card-back-medallion grid size-[34cqi] place-items-center rounded-full">
-        <span class="font-serif text-[17cqi] leading-none font-medium text-back-line italic">
+      <div class="grid size-[30cqi] place-items-center rounded-full bg-back-line">
+        <span class="font-display text-[19cqi] leading-none font-extrabold tracking-tight text-back">
           S
         </span>
       </div>
@@ -22,42 +24,27 @@ const { class: className } = Astro.props;
 <style>
   .card-back {
     box-shadow:
-      inset 0 0 0 1px color-mix(in srgb, var(--back-line) 18%, transparent),
+      inset 0 0 0 1px hsl(0 0% 100% / 0.12),
       var(--card-shadow);
-    background-image:
-      radial-gradient(
-        ellipse at 50% 40%,
-        color-mix(in srgb, var(--back-line) 10%, transparent),
-        transparent 70%
-      ),
-      linear-gradient(160deg, var(--back), var(--back-deep));
   }
 
-  .card-back-frame {
-    border: 1px solid color-mix(in srgb, var(--back-line) 55%, transparent);
-    background-image:
-      repeating-linear-gradient(
-        45deg,
-        color-mix(in srgb, var(--back-line) 16%, transparent) 0 1px,
-        transparent 1px 11px
-      ),
-      repeating-linear-gradient(
-        -45deg,
-        color-mix(in srgb, var(--back-line) 16%, transparent) 0 1px,
-        transparent 1px 11px
-      );
-    box-shadow: inset 0 0 0 4px var(--back-deep);
+  /* Halftone dots, densest at the corners and fading out toward the middle. */
+  .card-back-dots {
+    background-image: radial-gradient(
+      circle,
+      var(--back-line) 0 0.9cqi,
+      transparent 1cqi
+    );
+    background-size: 4.5cqi 4.5cqi;
+    background-position: center;
     mask-image: radial-gradient(
-      circle at 50% 50%,
-      transparent 19cqi,
-      #000 19.5cqi
+      ellipse 70% 60% at 50% 50%,
+      transparent 35%,
+      #000 100%
     );
   }
 
-  .card-back-medallion {
-    border: 1px solid color-mix(in srgb, var(--back-line) 70%, transparent);
-    box-shadow:
-      0 0 0 5px var(--back),
-      0 0 0 6px color-mix(in srgb, var(--back-line) 30%, transparent);
+  .card-back-frame {
+    border: 1.5px solid var(--back-line);
   }
 </style>

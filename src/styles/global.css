@@ -1,50 +1,54 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/fraunces/full.css';
-@import '@fontsource-variable/fraunces/full-italic.css';
-@import '@fontsource-variable/inter';
+@import '@fontsource-variable/bricolage-grotesque/standard.css';
+@import '@fontsource-variable/instrument-sans/standard.css';
+@import '@fontsource-variable/instrument-sans/standard-italic.css';
+@import '@fontsource/dm-mono/400.css';
+@import '@fontsource/dm-mono/500.css';
 
 @custom-variant dark (@media (prefers-color-scheme: dark));
 
 /* ---------------------------------------------------------------------------
- * Palette. Components refer to these through the Tailwind theme below, so
- * dark mode only needs to swap the raw values here.
+ * Palette: risograph print. Off-white stock, ultramarine and fluorescent pink
+ * inks. Components refer to these through the Tailwind theme below, so dark
+ * mode only needs to swap the raw values here.
  * ------------------------------------------------------------------------- */
 
 :root {
   color-scheme: light dark;
 
-  --paper: #f4efe5;
-  --paper-deep: #ebe3d3;
-  --surface: #fffcf7;
-  --ink: #1d1a16;
-  --ink-soft: #57503f;
-  --ink-faint: #8a8170;
-  --line: #e0d6c4;
-  --line-strong: #c9bca4;
+  --paper: #ecebe6;
+  --paper-deep: #e0dfd8;
+  --surface: #fafaf7;
+  --ink: #15151c;
+  --ink-soft: #4a4a55;
+  --ink-faint: #82828c;
+  --line: #d6d5cd;
+  --line-strong: #b4b3aa;
 
-  --accent: #b14d26;
-  --accent-hover: #963d1a;
-  --accent-ink: #fff8f1;
-  --accent-soft: #f1dccd;
+  --accent: #2b3bd9;
+  --accent-hover: #1d2bb5;
+  --accent-ink: #ffffff;
+  --accent-soft: #dadef9;
+  --pop: #ff4f93;
 
-  --back: #1f2b3d;
-  --back-deep: #172131;
-  --back-line: #c8a560;
+  --back: #2b3bd9;
+  --back-deep: #2231bd;
+  --back-line: #ff7eb0;
 
-  --suit-reframe: #4f5bb8;
-  --suit-subtract: #2f7c86;
-  --suit-structure: #3d7a4d;
-  --suit-act: #c15a22;
-  --suit-pace: #7d55a3;
-  --suit-feel: #b8435f;
-  --suit-resource: #a07a1c;
+  --suit-reframe: #2b3bd9;
+  --suit-subtract: #00808a;
+  --suit-structure: #2a8a3e;
+  --suit-act: #f0531c;
+  --suit-pace: #8645d6;
+  --suit-feel: #e42d79;
+  --suit-resource: #b78a00;
 
-  --shadow-color: 32 25% 30%;
+  --shadow-color: 240 20% 25%;
   --card-shadow:
     0 1px 1px hsl(var(--shadow-color) / 0.06),
     0 2px 4px hsl(var(--shadow-color) / 0.06),
     0 8px 16px -4px hsl(var(--shadow-color) / 0.1),
-    0 24px 48px -12px hsl(var(--shadow-color) / 0.18);
+    0 24px 48px -12px hsl(var(--shadow-color) / 0.2);
   --card-shadow-sm:
     0 1px 1px hsl(var(--shadow-color) / 0.05),
     0 2px 6px -1px hsl(var(--shadow-color) / 0.08);
@@ -52,31 +56,32 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #14120f;
-    --paper-deep: #1b1814;
-    --surface: #221f1a;
-    --ink: #f1ebdf;
-    --ink-soft: #bfb5a3;
-    --ink-faint: #8a8170;
-    --line: #322d26;
-    --line-strong: #4a4339;
+    --paper: #101014;
+    --paper-deep: #19191f;
+    --surface: #1d1d24;
+    --ink: #eeeef3;
+    --ink-soft: #b2b2bf;
+    --ink-faint: #7c7c89;
+    --line: #2c2c35;
+    --line-strong: #44444f;
 
-    --accent: #e27a4c;
-    --accent-hover: #ec916a;
-    --accent-ink: #1d120c;
-    --accent-soft: #3a2519;
+    --accent: #8792ff;
+    --accent-hover: #a3acff;
+    --accent-ink: #0d0f2e;
+    --accent-soft: #23264d;
+    --pop: #ff6aa6;
 
-    --back: #1c2738;
-    --back-deep: #131b28;
-    --back-line: #b8975a;
+    --back: #2b3bd9;
+    --back-deep: #1f2cb0;
+    --back-line: #ff7eb0;
 
-    --suit-reframe: #96a0ec;
-    --suit-subtract: #6cbcc6;
-    --suit-structure: #7fbf8e;
-    --suit-act: #ec9461;
-    --suit-pace: #b996dc;
-    --suit-feel: #ea8aa1;
-    --suit-resource: #d9b356;
+    --suit-reframe: #8f99ff;
+    --suit-subtract: #45c4cc;
+    --suit-structure: #6ccf80;
+    --suit-act: #ff8a5c;
+    --suit-pace: #b78cf5;
+    --suit-feel: #ff6aa6;
+    --suit-resource: #f0c43c;
 
     --shadow-color: 0 0% 0%;
     --card-shadow:
@@ -122,6 +127,7 @@
   --color-accent-hover: var(--accent-hover);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
+  --color-pop: var(--pop);
   --color-back: var(--back);
   --color-back-deep: var(--back-deep);
   --color-back-line: var(--back-line);
@@ -132,8 +138,10 @@
 }
 
 @theme {
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-sans: 'Instrument Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -157,11 +165,10 @@
 
   body {
     overflow-x: clip;
-    font-feature-settings: 'cv11', 'ss01';
   }
 
-  .font-serif {
-    font-variation-settings: 'SOFT' 50;
+  .font-display {
+    font-optical-sizing: auto;
   }
 
   ::selection {
@@ -183,7 +190,7 @@
     border-bottom-width: 2px;
     border-radius: 0.35rem;
     background: var(--surface);
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
     font-size: 0.8em;
     font-weight: 500;
     line-height: 1.4;
@@ -209,9 +216,10 @@
   }
 
   .eyebrow {
+    font-family: var(--font-mono);
     font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
+    font-weight: 500;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ink-faint);
   }
@@ -338,6 +346,30 @@
 
     &:hover {
       text-decoration-color: var(--accent);
+    }
+  }
+
+  /* A slightly crooked fluorescent highlighter stroke behind a word. */
+  .marker {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    white-space: nowrap;
+
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 0.5em -0.08em 0.04em -0.08em;
+      background: var(--pop);
+      border-radius: 0.12em 0.3em 0.16em 0.4em;
+      transform: rotate(-2deg) skewX(-10deg);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .marker::before {
+      opacity: 0.75;
     }
   }
 

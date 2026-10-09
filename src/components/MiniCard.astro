@@ -18,11 +18,11 @@ const { cue } = Astro.props;
 >
   <div class="flex items-start justify-between">
     <CardIndex id={cue.id} suit={cue.suit} />
-    <span class="text-[0.625rem] font-semibold tracking-[0.16em] text-suit uppercase">
+    <span class="text-[0.625rem] font-mono font-medium tracking-[0.08em] text-suit uppercase">
       {SUITS[cue.suit].name}
     </span>
   </div>
-  <p class="mt-6 font-serif text-2xl leading-[1.1] font-[480] tracking-[-0.01em] text-balance text-ink">
+  <p class="mt-6 font-display text-2xl leading-[1.1] font-[600] tracking-[-0.01em] text-balance text-ink">
     {cue.text}
   </p>
   <p class="mt-3 line-clamp-3 text-sm leading-relaxed text-ink-soft">
