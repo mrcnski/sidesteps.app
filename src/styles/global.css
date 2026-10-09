@@ -5,91 +5,51 @@
 @import '@fontsource/dm-mono/400.css';
 @import '@fontsource/dm-mono/500.css';
 
-@custom-variant dark (@media (prefers-color-scheme: dark));
-
 /* ---------------------------------------------------------------------------
- * Palette: legal-pad yellow stock printed in black ink, with a white
- * highlighter. Components refer to these through the Tailwind theme below, so
- * dark mode only needs to swap the raw values here.
+ * Palette: Nimbus, a slightly retro dark theme. Components refer to these
+ * through the Tailwind theme below. Card faces are tinted with their suit
+ * color (see `--card-face`), echoing Nimbus's colored backgrounds.
  * ------------------------------------------------------------------------- */
 
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 
-  --paper: #f0dfa0;
-  --paper-deep: #e6d28a;
-  --surface: #fffcf0;
-  --ink: #1c1a12;
-  --ink-soft: #4b4630;
-  --ink-faint: #7a7350;
-  --line: #d9c47c;
-  --line-strong: #bfa95f;
+  --paper: #1a1a1a;
+  --paper-deep: #212121;
+  --surface: #262626;
+  --ink: #d8dcd8;
+  --ink-soft: #aab0ab;
+  --ink-faint: #858585;
+  --line: #353535;
+  --line-strong: #454545;
 
-  --accent: #1c1a12;
-  --accent-hover: #3a3624;
-  --accent-ink: #fffcf0;
-  --accent-soft: #e6d28a;
-  --pop: #fffcf0;
+  --accent: #eaaa0c;
+  --accent-hover: #f5bd2e;
+  --accent-ink: #1a1a1a;
+  --accent-soft: #2b1147;
+  --pop: #47112b;
 
-  --back: #1c1a12;
-  --back-deep: #12110b;
-  --back-line: #f0dfa0;
+  --back: #2b1147;
+  --back-deep: #200c36;
+  --back-line: #ab75c3;
 
-  --suit-reframe: #2f45c8;
-  --suit-subtract: #00727a;
-  --suit-structure: #2a7a3a;
-  --suit-act: #d9432b;
-  --suit-pace: #7a42c2;
-  --suit-feel: #cf2f6e;
-  --suit-resource: #9a6f00;
+  --card-base: #161616;
+  --card-text: #eef0ec;
 
-  --shadow-color: 45 40% 20%;
+  --suit-reframe: #8f8dda;
+  --suit-subtract: #2fb08d;
+  --suit-structure: #70a5e1;
+  --suit-act: #e06a57;
+  --suit-pace: #ba86d2;
+  --suit-feel: #dba3a3;
+  --suit-resource: #eaaa0c;
+
+  --shadow-color: 0 0% 0%;
   --card-shadow:
-    0 1px 1px hsl(var(--shadow-color) / 0.08),
-    0 2px 4px hsl(var(--shadow-color) / 0.08),
-    0 8px 16px -4px hsl(var(--shadow-color) / 0.12),
-    0 24px 48px -12px hsl(var(--shadow-color) / 0.25);
-  --card-shadow-sm:
-    0 1px 1px hsl(var(--shadow-color) / 0.06),
-    0 2px 6px -1px hsl(var(--shadow-color) / 0.1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #16140d;
-    --paper-deep: #211e14;
-    --surface: #26231a;
-    --ink: #f4ecd0;
-    --ink-soft: #c9bf9c;
-    --ink-faint: #8e8667;
-    --line: #36311f;
-    --line-strong: #514a30;
-
-    --accent: #f0dfa0;
-    --accent-hover: #f7ebbd;
-    --accent-ink: #1c1a12;
-    --accent-soft: #3a341e;
-    --pop: #f0dfa0;
-
-    --back: #f0dfa0;
-    --back-deep: #e3cf86;
-    --back-line: #1c1a12;
-
-    --suit-reframe: #96a3ff;
-    --suit-subtract: #4cc3cb;
-    --suit-structure: #74cf86;
-    --suit-act: #ff8a6b;
-    --suit-pace: #bb92f5;
-    --suit-feel: #ff7fae;
-    --suit-resource: #f0c43c;
-
-    --shadow-color: 0 0% 0%;
-    --card-shadow:
-      0 1px 1px hsl(var(--shadow-color) / 0.3),
-      0 8px 16px -4px hsl(var(--shadow-color) / 0.4),
-      0 24px 48px -12px hsl(var(--shadow-color) / 0.6);
-    --card-shadow-sm: 0 2px 6px -1px hsl(var(--shadow-color) / 0.4);
-  }
+    0 1px 1px hsl(var(--shadow-color) / 0.3),
+    0 8px 16px -4px hsl(var(--shadow-color) / 0.4),
+    0 24px 48px -12px hsl(var(--shadow-color) / 0.6);
+  --card-shadow-sm: 0 2px 6px -1px hsl(var(--shadow-color) / 0.4);
 }
 
 [data-suit='reframe'] {
@@ -132,6 +92,9 @@
   --color-back-deep: var(--back-deep);
   --color-back-line: var(--back-line);
   --color-suit: var(--suit, var(--ink-faint));
+  --color-card-face: color-mix(in srgb, var(--suit) 16%, var(--card-base));
+  --color-card-edge: color-mix(in srgb, var(--suit) 35%, transparent);
+  --color-card-text: color-mix(in srgb, var(--suit) 30%, var(--card-text));
 
   --shadow-card: var(--card-shadow);
   --shadow-card-sm: var(--card-shadow-sm);
@@ -348,7 +311,7 @@
     }
   }
 
-  /* A slightly crooked fluorescent highlighter stroke behind a word. */
+  /* A slightly crooked highlighter stroke behind a word. */
   .marker {
     position: relative;
     z-index: 0;
@@ -366,12 +329,6 @@
     }
   }
 
-  @media (prefers-color-scheme: dark) {
-    .marker::before {
-      opacity: 0.3;
-    }
-  }
-
   /* Subtle paper grain, layered over card faces. */
   .grain {
     position: relative;
@@ -384,16 +341,9 @@
       z-index: -1;
       border-radius: inherit;
       pointer-events: none;
-      opacity: 0.35;
-      mix-blend-mode: multiply;
+      opacity: 0.5;
+      mix-blend-mode: soft-light;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.3 0 0 0 0 0.36 0 0 0 0.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
-    @media (prefers-color-scheme: dark) {
-      &::after {
-        opacity: 0.5;
-        mix-blend-mode: soft-light;
-      }
     }
   }
 }
