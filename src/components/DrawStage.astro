@@ -1,0 +1,88 @@
+---
+/**
+ * The interactive card on the home page: a small face-down deck whose top card
+ * flips over on each draw. Behaviour lives in `scripts/draw.ts`.
+ */
+import CardBack from './CardBack.astro';
+import CardFace from './CardFace.astro';
+import CueActions from './CueActions.astro';
+
+import { CUES } from '../data/cues';
+---
+
+<div class="draw-stage mx-auto w-[min(80%,20rem)] sm:w-88" data-stage>
+  <div class="relative">
+    <CardBack class="absolute inset-0 translate-x-[-7%] translate-y-[3%] -rotate-6 opacity-90" />
+    <CardBack class="absolute inset-0 translate-x-[5%] translate-y-[1%] rotate-[3.5deg]" />
+
+    <div class="flip relative" data-flip>
+      <div class="flip-inner">
+        <div class="flip-face">
+          <CardBack />
+        </div>
+        <div class="flip-face flip-front">
+          <CardFace cue={CUES[0]} heading="h2" />
+        </div>
+      </div>
+      <button
+        type="button"
+        class="absolute inset-0 z-10 flex cursor-pointer items-end justify-center rounded-[1.375rem] pb-[12%]"
+        aria-label="Draw a card"
+        data-flip-trigger
+      >
+        <span class="rounded-full border border-back-line/40 bg-back-deep/80 px-3.5 py-1.5 text-xs font-medium tracking-wide text-back-line backdrop-blur-sm">
+          Tap to draw
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <CueActions class="invisible mt-9 justify-center opacity-0 transition-opacity duration-500" />
+  <p class="sr-only" aria-live="polite" data-live></p>
+</div>
+
+<style>
+  .flip {
+    perspective: 1800px;
+  }
+
+  .flip-inner {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 750ms var(--ease-out-soft);
+  }
+
+  .flip-face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .flip-front {
+    position: absolute;
+    inset: 0;
+    transform: rotateY(180deg);
+  }
+
+  .flip.is-flipped .flip-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip:not(.is-flipped) {
+    transition: transform 300ms var(--ease-out-soft);
+  }
+
+  .flip:not(.is-flipped):hover {
+    transform: translateY(-6px) rotate(-1deg);
+  }
+
+  .flip.is-flipped [data-flip-trigger] {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flip-inner,
+    .flip:not(.is-flipped) {
+      transition: none;
+    }
+  }
+</style>

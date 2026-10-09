@@ -1,0 +1,36 @@
+---
+import Logo from './Logo.astro';
+
+import { CUE_COUNT } from '../data/cues';
+---
+
+<footer class="mt-24 border-t border-line">
+  <div class="container-page flex flex-col gap-6 py-10 text-sm text-ink-faint sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex items-center gap-3">
+      <Logo class="size-6 opacity-80" />
+      <p>
+        <span class="font-medium text-ink-soft">Sidesteps</span>
+        {` · ${CUE_COUNT} cues for getting unstuck.`}
+      </p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        <li>
+          <a class="hover:text-ink" href="/deck/">
+            The deck
+          </a>
+        </li>
+        <li>
+          <a class="hover:text-ink" href="/notebook/">
+            Notebook
+          </a>
+        </li>
+        <li>
+          <a class="hover:text-ink" href="/about/">
+            About
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</footer>

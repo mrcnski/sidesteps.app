@@ -1,0 +1,18 @@
+---
+import type { SuitId } from '../data/suits';
+
+interface Props {
+  suit: SuitId;
+  class?: string;
+}
+
+const { suit, class: className = 'size-4' } = Astro.props;
+---
+
+<svg
+  class:list={['shrink-0 fill-current', className]}
+  aria-hidden="true"
+  data-suit-glyph
+>
+  <use href={`#glyph-${suit}`}></use>
+</svg>

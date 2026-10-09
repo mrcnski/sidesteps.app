@@ -1,0 +1,34 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 32 32"
+  class:list={['shrink-0', className]}
+  aria-hidden="true"
+>
+  <rect
+    x="4"
+    y="6.5"
+    width="15"
+    height="21"
+    rx="2.5"
+    transform="rotate(-8 11.5 17)"
+    class="fill-back stroke-paper"
+    stroke-width="1.5"
+  ></rect>
+  <rect
+    x="12"
+    y="4"
+    width="15"
+    height="21"
+    rx="2.5"
+    transform="rotate(7 19.5 14.5)"
+    class="fill-accent stroke-paper"
+    stroke-width="1.5"
+  ></rect>
+</svg>

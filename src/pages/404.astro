@@ -1,0 +1,27 @@
+---
+import CardBack from '../components/CardBack.astro';
+import Icon from '../components/Icon.astro';
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found">
+  <section class="container-page flex flex-col items-center pt-16 pb-8 text-center sm:pt-24">
+    <CardBack class="w-32 rotate-[-8deg]" />
+    <p class="eyebrow mt-12">404</p>
+    <h1 class="mt-4 font-serif text-5xl font-[440] tracking-tight text-balance">
+      This card isn’t in the deck.
+    </h1>
+    <p class="mt-4 max-w-md text-lg text-ink-soft">
+      Perhaps it’s a sign. <em>Retrace your steps</em>, or draw something new.
+    </p>
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <a href="/?draw" class="btn btn-primary">
+        <Icon name="redo" />
+        Draw a card
+      </a>
+      <a href="/deck/" class="btn btn-secondary">
+        Browse the deck
+      </a>
+    </div>
+  </section>
+</Base>

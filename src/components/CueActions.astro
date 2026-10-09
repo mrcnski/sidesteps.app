@@ -1,0 +1,37 @@
+---
+/**
+ * "Keep" and "Copy link" buttons for a cue. Wired up by `scripts/cueActions`;
+ * the target cue is read from the nearest `[data-cue-id]` attribute.
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Whether to show the "Keep" button. */
+  keep?: boolean;
+  class?: string;
+}
+
+const { keep = true, class: className } = Astro.props;
+---
+
+<div
+  class:list={['flex flex-wrap items-center gap-2', className]}
+  data-cue-actions
+>
+  {keep && (
+    <button type="button" class="btn btn-secondary btn-sm" data-keep>
+      <span class="contents" data-keep-idle>
+        <Icon name="bookmark" />
+        Keep in notebook
+      </span>
+      <span class="contents hidden" data-keep-done>
+        <Icon name="check" class="text-accent" />
+        Kept
+      </span>
+    </button>
+  )}
+  <button type="button" class="btn btn-ghost btn-sm" data-copy-link>
+    <Icon name="link" />
+    <span data-copy-label>Copy link</span>
+  </button>
+</div>

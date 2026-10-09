@@ -1,0 +1,192 @@
+---
+import MiniCard from '../components/MiniCard.astro';
+import PageHeader from '../components/PageHeader.astro';
+import SuitGlyph from '../components/SuitGlyph.astro';
+import Base from '../layouts/Base.astro';
+
+import { CUE_COUNT, CUES } from '../data/cues';
+import { SUIT_IDS, SUITS } from '../data/suits';
+
+const chip =
+  'flex h-9 items-center gap-2 rounded-full border px-3.5 text-sm font-medium transition-colors';
+---
+
+<Base
+  title="The deck"
+  description={`All ${CUE_COUNT} Sidesteps cues, in seven suits.`}
+>
+  <section class="container-page pt-10 sm:pt-16">
+    <PageHeader eyebrow={`${CUE_COUNT} cards`} title="The deck">
+      Every cue, laid out on the table. Browse for one that speaks to you, or
+      filter by suit.
+    </PageHeader>
+
+    <div class="sticky top-0 z-10 -mx-5 mt-10 border-b border-line bg-paper/85 px-5 py-4 backdrop-blur-md sm:-mx-8 sm:px-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div
+          class="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0"
+          role="group"
+          aria-label="Filter by suit"
+        >
+          <button
+            type="button"
+            class={chip}
+            data-filter="all"
+            aria-pressed="true"
+          >
+            All
+          </button>
+          {SUIT_IDS.map((id) => (
+            <button
+              type="button"
+              class={chip}
+              data-filter={id}
+              data-suit={id}
+              aria-pressed="false"
+            >
+              <SuitGlyph suit={id} class="size-3 text-suit" />
+              {SUITS[id].name}
+            </button>
+          ))}
+        </div>
+        <label class="relative block lg:w-64">
+          <span class="sr-only">Search cues</span>
+          <svg
+            viewBox="0 0 24 24"
+            class="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-ink-faint"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <path d="m20 20-4.2-4.2"></path>
+          </svg>
+          <input
+            type="search"
+            class="input h-10 rounded-full pl-10 text-sm"
+            placeholder="Search"
+            data-search
+          />
+        </label>
+      </div>
+    </div>
+
+    <p class="mt-6 text-sm text-ink-faint" aria-live="polite" data-count>
+      Showing all {CUE_COUNT} cards
+    </p>
+
+    <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {CUES.map((cue) => (
+        <li
+          data-cue
+          data-suit-id={cue.suit}
+          data-search-text={`${cue.text} ${cue.note}`.toLowerCase()}
+        >
+          <MiniCard cue={cue} />
+        </li>
+      ))}
+    </ul>
+
+    <div class="hidden py-20 text-center" data-empty>
+      <p class="font-serif text-2xl">No cards match.</p>
+      <p class="mt-2 text-ink-soft">
+        Try a different word, or{' '}
+        <button type="button" class="link" data-reset>
+          show all cards
+        </button>
+        .
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  [data-filter][aria-pressed='false'] {
+    border-color: var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+  }
+  [data-filter][aria-pressed='false']:hover {
+    border-color: var(--line-strong);
+    color: var(--ink);
+  }
+  [data-filter][aria-pressed='true'] {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  [data-filter][aria-pressed='true'] svg {
+    color: inherit;
+  }
+</style>
+
+<script>
+  import { SUIT_IDS, type SuitId } from '../data/suits';
+
+  const chips = [
+    ...document.querySelectorAll<HTMLButtonElement>('[data-filter]'),
+  ];
+  const items = [...document.querySelectorAll<HTMLElement>('[data-cue]')];
+  const search = document.querySelector<HTMLInputElement>('[data-search]')!;
+  const count = document.querySelector<HTMLElement>('[data-count]')!;
+  const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+
+  let suit: SuitId | 'all' = 'all';
+
+  const fromHash = (): SuitId | 'all' => {
+    const hash = location.hash.slice(1);
+    return (SUIT_IDS as readonly string[]).includes(hash)
+      ? (hash as SuitId)
+      : 'all';
+  };
+
+  function apply() {
+    const query = search.value.trim().toLowerCase();
+    let shown = 0;
+    for (const item of items) {
+      const visible =
+        (suit === 'all' || item.dataset.suitId === suit) &&
+        (!query || item.dataset.searchText!.includes(query));
+      item.hidden = !visible;
+      if (visible) shown++;
+    }
+    for (const chip of chips) {
+      chip.setAttribute('aria-pressed', String(chip.dataset.filter === suit));
+    }
+    count.textContent =
+      shown === items.length
+        ? `Showing all ${items.length} cards`
+        : `Showing ${shown} of ${items.length} cards`;
+    empty.classList.toggle('hidden', shown > 0);
+  }
+
+  function setSuit(next: SuitId | 'all') {
+    suit = next;
+    history.replaceState(
+      null,
+      '',
+      next === 'all' ? location.pathname : `#${next}`,
+    );
+    apply();
+  }
+
+  chips.forEach((chip) =>
+    chip.addEventListener('click', () =>
+      setSuit(chip.dataset.filter as SuitId | 'all'),
+    ),
+  );
+  search.addEventListener('input', apply);
+  document.querySelector('[data-reset]')?.addEventListener('click', () => {
+    search.value = '';
+    setSuit('all');
+  });
+  window.addEventListener('hashchange', () => {
+    suit = fromHash();
+    apply();
+  });
+
+  suit = fromHash();
+  apply();
+</script>

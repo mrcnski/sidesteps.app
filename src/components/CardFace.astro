@@ -1,0 +1,53 @@
+---
+import CardIndex from './CardIndex.astro';
+
+import type { Cue } from '../data/cues';
+import { SUITS } from '../data/suits';
+
+interface Props {
+  cue: Cue;
+  heading?: 'h1' | 'h2' | 'p';
+  class?: string;
+}
+
+const { cue, heading: Heading = 'p', class: className } = Astro.props;
+---
+
+<div class:list={['@container', className]}>
+  <article
+    class="grain flex aspect-5/7 w-full flex-col rounded-[clamp(0.875rem,5cqi,1.375rem)] border border-line bg-surface p-[7cqi] shadow-card"
+    data-suit={cue.suit}
+    data-card-face
+  >
+    <div class="flex items-start justify-between">
+      <CardIndex id={cue.id} suit={cue.suit} />
+      <span
+        class="text-[max(0.625rem,3cqi)] font-semibold tracking-[0.16em] text-suit uppercase"
+        data-cue-suit-name
+      >
+        {SUITS[cue.suit].name}
+      </span>
+    </div>
+
+    <div class="flex flex-1 flex-col justify-center py-[4cqi]">
+      <Heading
+        class="font-serif text-[max(1.375rem,10.5cqi)] leading-[1.06] font-[480] tracking-[-0.015em] text-balance text-ink"
+        data-cue-text
+      >
+        {cue.text}
+      </Heading>
+      <span
+        class="mt-[6cqi] block h-[2px] w-[10cqi] rounded-full bg-suit"
+        aria-hidden="true"
+      ></span>
+      <p
+        class="mt-[5cqi] text-[max(0.8125rem,4.3cqi)] leading-relaxed text-pretty text-ink-soft"
+        data-cue-note
+      >
+        {cue.note}
+      </p>
+    </div>
+
+    <CardIndex id={cue.id} suit={cue.suit} class="self-end rotate-180" />
+  </article>
+</div>

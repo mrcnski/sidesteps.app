@@ -1,0 +1,31 @@
+---
+import CardIndex from './CardIndex.astro';
+
+import type { Cue } from '../data/cues';
+import { SUITS } from '../data/suits';
+
+interface Props {
+  cue: Cue;
+}
+
+const { cue } = Astro.props;
+---
+
+<a
+  href={`/cue/${cue.slug}/`}
+  class="group grain @container flex min-h-56 flex-col rounded-2xl border border-line bg-surface p-5 shadow-card-sm transition duration-300 ease-out-soft hover:-translate-y-1 hover:border-line-strong hover:shadow-card"
+  data-suit={cue.suit}
+>
+  <div class="flex items-start justify-between">
+    <CardIndex id={cue.id} suit={cue.suit} />
+    <span class="text-[0.625rem] font-semibold tracking-[0.16em] text-suit uppercase">
+      {SUITS[cue.suit].name}
+    </span>
+  </div>
+  <p class="mt-6 font-serif text-2xl leading-[1.1] font-[480] tracking-[-0.01em] text-balance text-ink">
+    {cue.text}
+  </p>
+  <p class="mt-3 line-clamp-3 text-sm leading-relaxed text-ink-soft">
+    {cue.note}
+  </p>
+</a>

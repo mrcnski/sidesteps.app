@@ -1,0 +1,180 @@
+---
+import Icon from '../components/Icon.astro';
+import PageHeader from '../components/PageHeader.astro';
+import SuitGlyph from '../components/SuitGlyph.astro';
+import Base from '../layouts/Base.astro';
+
+import { CUE_COUNT, cuesInSuit } from '../data/cues';
+import { SUIT_IDS, SUITS } from '../data/suits';
+---
+
+<Base
+  title="About"
+  description="What Sidesteps is, how to use it, and where the idea comes from."
+>
+  <article class="container-page pt-10 sm:pt-16">
+    <PageHeader
+      eyebrow="About"
+      title="Small, sideways nudges for hard problems."
+    >
+      Sidesteps is a deck of {CUE_COUNT} short cues. None of them will solve
+      your problem for you. They’re meant to knock your thinking a few degrees
+      off its usual track.
+    </PageHeader>
+
+    <div class="mt-16 grid gap-16 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-24">
+      <div class="prose-page max-w-2xl">
+        <h2>Why it works</h2>
+        <p>
+          When you’re stuck, it’s usually not for lack of effort. You’ve been
+          circling the same few approaches, and each lap digs the groove a
+          little deeper. A random prompt from outside that groove forces a
+          different question: <em>what would this look like if…?</em>
+        </p>
+        <p>
+          The cues are deliberately short and open. “Salt” or “Look at the
+          fruit” can mean something different for a stubborn bug, a stalled
+          essay, or a difficult conversation. The interpretation is where the
+          useful thinking happens.
+        </p>
+
+        <h2>How to use it</h2>
+        <ul>
+          <li>
+            <strong>Name the problem first.</strong> Even one sentence sharpens
+            what you’re looking for.
+          </li>
+          <li>
+            <strong>Take the first reading that moves you.</strong> There’s no
+            correct interpretation. If a card points the wrong way, notice why;
+            that’s often informative too.
+          </li>
+          <li>
+            <strong>Don’t over-draw.</strong> One card held for a few minutes
+            beats ten skimmed in a row.
+          </li>
+          <li>
+            <strong>Keep what lands.</strong> Save useful cards to your notebook
+            and write down what they made you think of.
+          </li>
+        </ul>
+        <p>
+          Some cards contradict each other. <em>Maximize</em> and{' '}
+          <em>Try minimalism</em>, <em>Overwhelming force</em> and{' '}
+          <em>Restraint</em>. That’s on purpose: deciding which one applies is
+          itself a way of seeing the problem more clearly.
+        </p>
+
+        <h2>Where the idea comes from</h2>
+        <p>
+          Sidesteps owes an obvious debt to <em>Oblique Strategies</em>, the
+          card deck Brian Eno and Peter Schmidt made in 1975 to help artists
+          through creative blocks. This deck takes the same idea and points it
+          at everyday problems: practical, technical, and personal, as well as
+          creative.
+        </p>
+
+        <h2>Privacy</h2>
+        <p>
+          There are no accounts. Whatever you type, and the cards you keep, are
+          stored only in your browser’s local storage.
+        </p>
+
+        <div class="not-prose mt-12">
+          <a href="/?draw" class="btn btn-primary btn-lg">
+            <Icon name="redo" />
+            Draw a card
+          </a>
+        </div>
+      </div>
+
+      <aside class="self-start lg:sticky lg:top-8 lg:pt-2">
+        <h2 class="eyebrow">The seven suits</h2>
+        <ul class="mt-5 divide-y divide-line border-y border-line">
+          {SUIT_IDS.map((id) => (
+            <li data-suit={id}>
+              <a
+                href={`/deck/#${id}`}
+                class="group flex items-start gap-3 py-4"
+              >
+                <SuitGlyph suit={id} class="mt-1 size-3.5 text-suit" />
+                <span class="flex-1">
+                  <span class="flex items-baseline justify-between gap-2">
+                    <span class="font-semibold group-hover:text-accent">
+                      {SUITS[id].name}
+                    </span>
+                    <span class="text-xs text-ink-faint tabular-nums">
+                      {cuesInSuit(id).length} cards
+                    </span>
+                  </span>
+                  <span class="mt-0.5 block text-sm text-ink-soft">
+                    {SUITS[id].description}
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .prose-page {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  .prose-page :global(h2) {
+    margin-top: 3rem;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 480;
+    font-variation-settings: 'SOFT' 50;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .prose-page > :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .prose-page :global(p + p) {
+    margin-top: 1.1rem;
+  }
+
+  .prose-page :global(ul) {
+    margin-block: 1.25rem;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .prose-page :global(li) {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .prose-page :global(li + li) {
+    margin-top: 0.75rem;
+  }
+
+  .prose-page :global(li)::before {
+    content: '';
+    position: absolute;
+    left: 0.25rem;
+    top: 0.72em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+
+  .prose-page :global(strong) {
+    font-weight: 600;
+    color: var(--ink);
+  }
+</style>
