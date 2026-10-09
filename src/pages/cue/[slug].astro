@@ -44,7 +44,10 @@ const related = [...sameSuit.slice(at + 1), ...sameSuit.slice(0, at)].slice(
       <p class="flex items-center gap-2 text-sm text-ink-soft">
         <SuitGlyph suit={cue.suit} class="size-3.5 text-suit" />
         <span>
-          {`Card ${cue.id} of ${CUES.length} · `}
+          {`Card ${cue.id} of ${CUES.length}`}
+          <span class="mx-1.5" aria-hidden="true">
+            ·
+          </span>
           <a href={`/deck/#${cue.suit}`} class="link">
             {suit.name}
           </a>
