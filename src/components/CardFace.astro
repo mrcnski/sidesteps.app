@@ -7,45 +7,45 @@ import { SUITS } from '../data/suits';
 interface Props {
   cue: Cue;
   heading?: 'h1' | 'h2' | 'p';
+  /** Use a lighter shadow, e.g. for cards laid out in a grid. */
+  flat?: boolean;
   class?: string;
 }
 
-const { cue, heading: Heading = 'p', class: className } = Astro.props;
+const {
+  cue,
+  heading: Heading = 'p',
+  flat = false,
+  class: className,
+} = Astro.props;
 ---
 
 <div class:list={['@container', className]}>
   <article
-    class="grain flex aspect-5/7 w-full flex-col rounded-[clamp(0.875rem,5cqi,1.375rem)] border border-line bg-surface p-[7cqi] shadow-card"
+    class:list={[
+      'grain flex aspect-5/7 w-full flex-col rounded-[clamp(0.75rem,5cqi,1.375rem)] border border-line bg-surface p-[7cqi]',
+      flat ? 'shadow-card-sm' : 'shadow-card',
+    ]}
     data-suit={cue.suit}
     data-card-face
   >
     <div class="flex items-start justify-between">
       <CardIndex id={cue.id} suit={cue.suit} />
       <span
-        class="text-[max(0.625rem,3cqi)] font-mono font-medium tracking-[0.08em] text-suit uppercase"
+        class="font-mono text-[max(0.5625rem,3cqi)] font-medium tracking-[0.08em] text-suit uppercase"
         data-cue-suit-name
       >
         {SUITS[cue.suit].name}
       </span>
     </div>
 
-    <div class="flex flex-1 flex-col justify-center py-[4cqi]">
+    <div class="flex flex-1 items-center justify-center px-[2cqi]">
       <Heading
-        class="font-display text-[max(1.375rem,10.5cqi)] leading-[1.06] font-[600] tracking-[-0.015em] text-balance text-ink"
+        class="text-center font-display text-[max(1.25rem,12cqi)] leading-[1.02] font-[620] tracking-[-0.025em] text-balance text-ink"
         data-cue-text
       >
         {cue.text}
       </Heading>
-      <span
-        class="mt-[6cqi] block h-[2px] w-[10cqi] rounded-full bg-suit"
-        aria-hidden="true"
-      ></span>
-      <p
-        class="mt-[5cqi] text-[max(0.8125rem,4.3cqi)] leading-relaxed text-pretty text-ink-soft"
-        data-cue-note
-      >
-        {cue.note}
-      </p>
     </div>
 
     <CardIndex id={cue.id} suit={cue.suit} class="self-end rotate-180" />

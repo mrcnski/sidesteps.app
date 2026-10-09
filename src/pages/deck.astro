@@ -77,12 +77,12 @@ const chip =
       Showing all {CUE_COUNT} cards
     </p>
 
-    <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <ul class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 xl:grid-cols-5">
       {CUES.map((cue) => (
         <li
           data-cue
           data-suit-id={cue.suit}
-          data-search-text={`${cue.text} ${cue.note}`.toLowerCase()}
+          data-search-text={cue.text.toLowerCase()}
         >
           <MiniCard cue={cue} />
         </li>

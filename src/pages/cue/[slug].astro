@@ -33,7 +33,10 @@ const related = [...sameSuit.slice(at + 1), ...sameSuit.slice(0, at)].slice(
 );
 ---
 
-<Base title={cue.text} description={`${cue.text}. ${cue.note}`}>
+<Base
+  title={cue.text}
+  description={`“${cue.text}”: a card from Sidesteps, a deck of cues for getting unstuck.`}
+>
   <section class="container-page grid items-center gap-x-20 gap-y-14 pt-8 sm:pt-14 lg:grid-cols-[auto_minmax(0,1fr)]">
     <div class="mx-auto w-[min(100%,20rem)] sm:w-88" data-cue-id={cue.id}>
       <CardFace cue={cue} heading="h1" />
@@ -143,7 +146,7 @@ const related = [...sameSuit.slice(at + 1), ...sameSuit.slice(0, at)].slice(
       <h2 id="related-title" class="eyebrow">
         More from {suit.name}
       </h2>
-      <ul class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <ul class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
         {related.map((other) => (
           <li>
             <MiniCard cue={other} />

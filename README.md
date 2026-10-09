@@ -19,7 +19,7 @@ npm run format    # prettier --write
 
 ## Layout
 
-- `src/data/cues.ts`: the deck. Each cue is `[text, suit, note]`; ids are
+- `src/data/cues.ts`: the deck. Each cue is `[text, suit]`; ids are
   positions in the list, so **append new cues at the end** to keep existing ids
   (and saved notebook entries) stable.
 - `src/data/suits.ts`: the seven suits. Suit colours live in

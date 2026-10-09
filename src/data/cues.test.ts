@@ -12,8 +12,4 @@ describe('CUES', () => {
   it('uses every suit', () => {
     expect(new Set(CUES.map((c) => c.suit))).toEqual(new Set(SUIT_IDS));
   });
-
-  it('has notes that end in punctuation', () => {
-    for (const cue of CUES) expect(cue.note).toMatch(/[.?!]$/);
-  });
 });

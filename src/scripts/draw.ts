@@ -37,7 +37,6 @@ export function initDraw(): void {
     const num = String(cue.id).padStart(2, '0');
     face!.dataset.suit = cue.suit;
     face!.querySelector('[data-cue-text]')!.textContent = cue.text;
-    face!.querySelector('[data-cue-note]')!.textContent = cue.note;
     face!.querySelector('[data-cue-suit-name]')!.textContent = suit.name;
     face!.querySelectorAll('[data-cue-num]').forEach((el) => {
       el.textContent = num;
@@ -46,8 +45,7 @@ export function initDraw(): void {
       el.setAttribute('href', `#glyph-${cue.suit}`);
     });
     stage!.dataset.cueId = String(cue.id);
-    if (live)
-      live.textContent = `Card ${cue.id}, ${suit.name}: ${cue.text}. ${cue.note}`;
+    if (live) live.textContent = `Card ${cue.id}, ${suit.name}: ${cue.text}`;
   }
 
   function nextCue(): Cue {
