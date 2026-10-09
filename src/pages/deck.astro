@@ -17,8 +17,7 @@ const chip =
 >
   <section class="container-page pt-10 sm:pt-16">
     <PageHeader eyebrow={`${CUE_COUNT} cards`} title="The deck">
-      Every cue, laid out on the table. Browse for one that speaks to you, or
-      filter by suit.
+      Browse the cues for one that speaks to you, or filter by suit.
     </PageHeader>
 
     <div class="sticky top-0 z-10 -mx-5 mt-10 border-b border-line bg-paper/85 px-5 py-4 backdrop-blur-md sm:-mx-8 sm:px-8">
@@ -109,7 +108,8 @@ const chip =
     color: var(--ink-soft);
   }
   [data-filter][aria-pressed='false']:hover {
-    border-color: var(--line-strong);
+    border-color: color-mix(in srgb, var(--suit, var(--ink)) 50%, transparent);
+    background: color-mix(in srgb, var(--suit, var(--ink)) 12%, var(--surface));
     color: var(--ink);
   }
   [data-filter][aria-pressed='true'] {
