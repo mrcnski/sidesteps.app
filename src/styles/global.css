@@ -8,79 +8,79 @@
 @custom-variant dark (@media (prefers-color-scheme: dark));
 
 /* ---------------------------------------------------------------------------
- * Palette: risograph print. Off-white stock, ultramarine and fluorescent pink
- * inks. Components refer to these through the Tailwind theme below, so dark
- * mode only needs to swap the raw values here.
+ * Palette: legal-pad yellow stock printed in black ink, with a white
+ * highlighter. Components refer to these through the Tailwind theme below, so
+ * dark mode only needs to swap the raw values here.
  * ------------------------------------------------------------------------- */
 
 :root {
   color-scheme: light dark;
 
-  --paper: #ecebe6;
-  --paper-deep: #e0dfd8;
-  --surface: #fafaf7;
-  --ink: #15151c;
-  --ink-soft: #4a4a55;
-  --ink-faint: #82828c;
-  --line: #d6d5cd;
-  --line-strong: #b4b3aa;
+  --paper: #f0dfa0;
+  --paper-deep: #e6d28a;
+  --surface: #fffcf0;
+  --ink: #1c1a12;
+  --ink-soft: #4b4630;
+  --ink-faint: #7a7350;
+  --line: #d9c47c;
+  --line-strong: #bfa95f;
 
-  --accent: #2b3bd9;
-  --accent-hover: #1d2bb5;
-  --accent-ink: #ffffff;
-  --accent-soft: #dadef9;
-  --pop: #ff4f93;
+  --accent: #1c1a12;
+  --accent-hover: #3a3624;
+  --accent-ink: #fffcf0;
+  --accent-soft: #e6d28a;
+  --pop: #fffcf0;
 
-  --back: #2b3bd9;
-  --back-deep: #2231bd;
-  --back-line: #ff7eb0;
+  --back: #1c1a12;
+  --back-deep: #12110b;
+  --back-line: #f0dfa0;
 
-  --suit-reframe: #2b3bd9;
-  --suit-subtract: #00808a;
-  --suit-structure: #2a8a3e;
-  --suit-act: #f0531c;
-  --suit-pace: #8645d6;
-  --suit-feel: #e42d79;
-  --suit-resource: #b78a00;
+  --suit-reframe: #2f45c8;
+  --suit-subtract: #00727a;
+  --suit-structure: #2a7a3a;
+  --suit-act: #d9432b;
+  --suit-pace: #7a42c2;
+  --suit-feel: #cf2f6e;
+  --suit-resource: #9a6f00;
 
-  --shadow-color: 240 20% 25%;
+  --shadow-color: 45 40% 20%;
   --card-shadow:
-    0 1px 1px hsl(var(--shadow-color) / 0.06),
-    0 2px 4px hsl(var(--shadow-color) / 0.06),
-    0 8px 16px -4px hsl(var(--shadow-color) / 0.1),
-    0 24px 48px -12px hsl(var(--shadow-color) / 0.2);
+    0 1px 1px hsl(var(--shadow-color) / 0.08),
+    0 2px 4px hsl(var(--shadow-color) / 0.08),
+    0 8px 16px -4px hsl(var(--shadow-color) / 0.12),
+    0 24px 48px -12px hsl(var(--shadow-color) / 0.25);
   --card-shadow-sm:
-    0 1px 1px hsl(var(--shadow-color) / 0.05),
-    0 2px 6px -1px hsl(var(--shadow-color) / 0.08);
+    0 1px 1px hsl(var(--shadow-color) / 0.06),
+    0 2px 6px -1px hsl(var(--shadow-color) / 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #101014;
-    --paper-deep: #19191f;
-    --surface: #1d1d24;
-    --ink: #eeeef3;
-    --ink-soft: #b2b2bf;
-    --ink-faint: #7c7c89;
-    --line: #2c2c35;
-    --line-strong: #44444f;
+    --paper: #16140d;
+    --paper-deep: #211e14;
+    --surface: #26231a;
+    --ink: #f4ecd0;
+    --ink-soft: #c9bf9c;
+    --ink-faint: #8e8667;
+    --line: #36311f;
+    --line-strong: #514a30;
 
-    --accent: #8792ff;
-    --accent-hover: #a3acff;
-    --accent-ink: #0d0f2e;
-    --accent-soft: #23264d;
-    --pop: #ff6aa6;
+    --accent: #f0dfa0;
+    --accent-hover: #f7ebbd;
+    --accent-ink: #1c1a12;
+    --accent-soft: #3a341e;
+    --pop: #f0dfa0;
 
-    --back: #2b3bd9;
-    --back-deep: #1f2cb0;
-    --back-line: #ff7eb0;
+    --back: #f0dfa0;
+    --back-deep: #e3cf86;
+    --back-line: #1c1a12;
 
-    --suit-reframe: #8f99ff;
-    --suit-subtract: #45c4cc;
-    --suit-structure: #6ccf80;
-    --suit-act: #ff8a5c;
-    --suit-pace: #b78cf5;
-    --suit-feel: #ff6aa6;
+    --suit-reframe: #96a3ff;
+    --suit-subtract: #4cc3cb;
+    --suit-structure: #74cf86;
+    --suit-act: #ff8a6b;
+    --suit-pace: #bb92f5;
+    --suit-feel: #ff7fae;
     --suit-resource: #f0c43c;
 
     --shadow-color: 0 0% 0%;
@@ -368,7 +368,7 @@
 
   @media (prefers-color-scheme: dark) {
     .marker::before {
-      opacity: 0.75;
+      opacity: 0.3;
     }
   }
 
