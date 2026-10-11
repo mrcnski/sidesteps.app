@@ -8,4 +8,8 @@ describe('slugify', () => {
     expect(slugify("Don't jam it")).toBe('dont-jam-it');
     expect(slugify('Think 10 moves ahead')).toBe('think-10-moves-ahead');
   });
+
+  it('strips accents', () => {
+    expect(slugify('¿Por qué no los dos?')).toBe('por-que-no-los-dos');
+  });
 });
