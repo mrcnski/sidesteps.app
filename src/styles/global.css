@@ -304,7 +304,9 @@
     }
   }
 
-  .link {
+  /* Also applied to plain links in long-form copy, e.g. the About page. */
+  .link,
+  .prose-page a:not([class]) {
     color: var(--ink);
     text-decoration: underline;
     text-decoration-color: var(--line-strong);
