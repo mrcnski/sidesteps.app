@@ -9,7 +9,7 @@ const { class: className } = Astro.props;
 <div class:list={['@container', className]} aria-hidden="true">
   <div class="card-back relative aspect-5/7 w-full overflow-hidden rounded-[clamp(0.875rem,5cqi,1.375rem)] bg-back shadow-card">
     <div class="card-back-frame absolute inset-[4.5cqi] overflow-hidden rounded-[3cqi]">
-      <div class="card-back-dots absolute inset-0"></div>
+      <div class="card-back-pattern absolute inset-0"></div>
     </div>
     <div class="absolute inset-0 grid place-items-center">
       <div class="grid size-[30cqi] place-items-center rounded-full bg-back-line">
@@ -28,20 +28,20 @@ const { class: className } = Astro.props;
       var(--card-shadow);
   }
 
-  /* Halftone dots, densest at the corners and fading out toward the middle. */
-  .card-back-dots {
-    background-image: radial-gradient(
-      circle,
-      var(--back-line) 0 0.9cqi,
-      transparent 1cqi
-    );
-    background-size: 4.5cqi 4.5cqi;
-    background-position: center;
-    mask-image: radial-gradient(
-      ellipse 70% 60% at 50% 50%,
-      transparent 35%,
-      #000 100%
-    );
+  /* Fine crosshatch, like a classic playing-card back. */
+  .card-back-pattern {
+    opacity: 0.45;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        var(--back-line) 0 1px,
+        transparent 1px 2.6cqi
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        var(--back-line) 0 1px,
+        transparent 1px 2.6cqi
+      );
   }
 
   .card-back-frame {
