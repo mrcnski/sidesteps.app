@@ -6,50 +6,102 @@
 @import '@fontsource/dm-mono/500.css';
 
 /* ---------------------------------------------------------------------------
- * Palette: Nimbus, a slightly retro dark theme. Components refer to these
- * through the Tailwind theme below. Card faces are tinted with their suit
- * color (see `--card-face`), echoing Nimbus's colored backgrounds.
+ * Palette: Nimbus, a slightly retro theme, in light ("Nimbus day") and dark
+ * variants that follow the system setting. Components refer to these through
+ * the Tailwind theme below. Card faces are tinted with their suit color; the
+ * `--tint-*` strengths set how much.
  * ------------------------------------------------------------------------- */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --paper: #1a1a1a;
-  --paper-deep: #212121;
-  --surface: #262626;
-  --ink: #d8dcd8;
-  --ink-soft: #aab0ab;
-  --ink-faint: #858585;
-  --line: #353535;
-  --line-strong: #454545;
+  --paper: #f2f1ec;
+  --paper-deep: #e8e7e1;
+  --surface: #fbfbf8;
+  --ink: #1a1a1a;
+  --ink-soft: #4d524e;
+  --ink-faint: #80847f;
+  --line: #dcdbd4;
+  --line-strong: #c8c7bf;
 
-  --accent: #eaaa0c;
-  --accent-hover: #f5bd2e;
+  --accent: #c98d00;
+  --accent-hover: #a87500;
   --accent-ink: #1a1a1a;
-  --accent-soft: #2b1147;
-  --pop: #47112b;
+  --accent-soft: #e9dcfa;
+  --pop: #f7dfa0;
 
-  --back: #112b47;
-  --back-deep: #0c2038;
-  --back-line: #70a5e1;
+  --back: #b4d0ef;
+  --back-deep: #9fc1e8;
+  --back-line: #3a76bf;
 
-  --card-base: #161616;
-  --card-text: #eef0ec;
+  --card-base: #ffffff;
+  --card-text: #1a1a1a;
+  --tint-face: 8%;
+  --tint-edge: 45%;
+  --tint-text: 45%;
 
-  --suit-reframe: #8f8dda;
-  --suit-subtract: #2fb08d;
-  --suit-structure: #70a5e1;
-  --suit-act: #e06a57;
-  --suit-pace: #ba86d2;
-  --suit-feel: #dba3a3;
-  --suit-resource: #eaaa0c;
+  --suit-reframe: #5e5bc4;
+  --suit-subtract: #1a8a6b;
+  --suit-structure: #3a76bf;
+  --suit-act: #c84a37;
+  --suit-pace: #8f55aa;
+  --suit-feel: #b86c6c;
+  --suit-resource: #b88500;
 
-  --shadow-color: 0 0% 0%;
+  --shadow-color: 30 20% 20%;
   --card-shadow:
-    0 1px 1px hsl(var(--shadow-color) / 0.3),
-    0 8px 16px -4px hsl(var(--shadow-color) / 0.4),
-    0 24px 48px -12px hsl(var(--shadow-color) / 0.6);
-  --card-shadow-sm: 0 2px 6px -1px hsl(var(--shadow-color) / 0.4);
+    0 1px 1px hsl(var(--shadow-color) / 0.06),
+    0 8px 16px -4px hsl(var(--shadow-color) / 0.1),
+    0 24px 48px -12px hsl(var(--shadow-color) / 0.2);
+  --card-shadow-sm: 0 2px 6px -1px hsl(var(--shadow-color) / 0.12);
+  --highlight: hsl(0 0% 100% / 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --paper: #1a1a1a;
+    --paper-deep: #212121;
+    --surface: #262626;
+    --ink: #d8dcd8;
+    --ink-soft: #aab0ab;
+    --ink-faint: #858585;
+    --line: #353535;
+    --line-strong: #454545;
+
+    --accent: #eaaa0c;
+    --accent-hover: #f5bd2e;
+    --accent-ink: #1a1a1a;
+    --accent-soft: #2b1147;
+    --pop: #47112b;
+
+    --back: #112b47;
+    --back-deep: #0c2038;
+    --back-line: #70a5e1;
+
+    --card-base: #161616;
+    --card-text: #eef0ec;
+    --tint-face: 16%;
+    --tint-edge: 35%;
+    --tint-text: 30%;
+
+    --suit-reframe: #8f8dda;
+    --suit-subtract: #2fb08d;
+    --suit-structure: #70a5e1;
+    --suit-act: #e06a57;
+    --suit-pace: #ba86d2;
+    --suit-feel: #dba3a3;
+    --suit-resource: #eaaa0c;
+
+    --shadow-color: 0 0% 0%;
+    --card-shadow:
+      0 1px 1px hsl(var(--shadow-color) / 0.3),
+      0 8px 16px -4px hsl(var(--shadow-color) / 0.4),
+      0 24px 48px -12px hsl(var(--shadow-color) / 0.6);
+    --card-shadow-sm: 0 2px 6px -1px hsl(var(--shadow-color) / 0.4);
+    --highlight: hsl(0 0% 100% / 0.12);
+  }
 }
 
 [data-suit='reframe'] {
@@ -92,9 +144,21 @@
   --color-back-deep: var(--back-deep);
   --color-back-line: var(--back-line);
   --color-suit: var(--suit, var(--ink-faint));
-  --color-card-face: color-mix(in srgb, var(--suit) 16%, var(--card-base));
-  --color-card-edge: color-mix(in srgb, var(--suit) 35%, transparent);
-  --color-card-text: color-mix(in srgb, var(--suit) 30%, var(--card-text));
+  --color-card-face: color-mix(
+    in srgb,
+    var(--suit) var(--tint-face),
+    var(--card-base)
+  );
+  --color-card-edge: color-mix(
+    in srgb,
+    var(--suit) var(--tint-edge),
+    transparent
+  );
+  --color-card-text: color-mix(
+    in srgb,
+    var(--suit) var(--tint-text),
+    var(--card-text)
+  );
 
   --shadow-card: var(--card-shadow);
   --shadow-card-sm: var(--card-shadow-sm);
@@ -240,7 +304,7 @@
     background: var(--accent);
     color: var(--accent-ink);
     box-shadow:
-      0 1px 0 hsl(0 0% 100% / 0.12) inset,
+      0 1px 0 var(--highlight) inset,
       0 6px 16px -6px hsl(var(--shadow-color) / 0.5);
 
     &:hover {
