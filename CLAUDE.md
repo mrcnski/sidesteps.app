@@ -5,7 +5,7 @@ Sidesteps is a static Astro + Tailwind v4 site: a deck of problem-solving cues. 
 ## Conventions
 
 - typescript: Order imports external first, then a blank line, then internal.
-- Use the CSS variables / theme colours in `src/styles/global.css` instead of hard-coded colours. The palette is Nimbus, light by default with a dark variant under `prefers-color-scheme: dark`; define every new variable in both. Suit-tinted surfaces use `bg-card-face`, `border-card-edge` and `text-card-text`.
+- Use the CSS variables / theme colours in `src/styles/global.css` instead of hard-coded colours. The palette is Nimbus, light by default with a dark variant under `:root[data-theme='dark']` (set from the saved choice or the system setting; see `ThemeToggle.astro`). Define every new variable in both, and use the `dark:` variant for theme-specific markup. Suit-tinted surfaces use `bg-card-face`, `border-card-edge` and `text-card-text`.
 - Cards use container queries (`cqi` units), so card internals scale with the card's width. Size a card by sizing its wrapper.
 - Keep `src/utils` pure and unit-tested; put DOM code in `src/scripts` or component `<script>`s.
 - Cue ids are list positions and are stored in users' notebooks: append new cues, don't reorder or delete.

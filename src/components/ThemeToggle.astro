@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+---
+
+<!-- Base.astro applies the initial theme; this flips and saves it. -->
+<button
+  type="button"
+  class="grid size-9 shrink-0 place-items-center rounded-full text-ink-soft transition-colors hover:bg-paper-deep hover:text-ink"
+  aria-label="Switch to dark theme"
+  data-theme-toggle
+>
+  <Icon name="moon" class="size-[1.15rem] dark:hidden" />
+  <Icon name="sun" class="hidden size-[1.15rem] dark:block" />
+</button>
+
+<script>
+  const KEY = 'sidesteps:theme';
+  const COLORS = { light: '#f2f1ec', dark: '#1a1a1a' };
+  type Theme = keyof typeof COLORS;
+
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>(
+    '[data-theme-toggle]',
+  )!;
+  const system = matchMedia('(prefers-color-scheme: dark)');
+
+  function apply(theme: Theme) {
+    root.dataset.theme = theme;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', COLORS[theme]);
+    toggle.setAttribute(
+      'aria-label',
+      theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme',
+    );
+  }
+
+  apply(root.dataset.theme === 'dark' ? 'dark' : 'light');
+
+  toggle.addEventListener('click', () => {
+    const next: Theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    // Choosing the system's own theme goes back to following the system.
+    if (next === (system.matches ? 'dark' : 'light')) {
+      localStorage.removeItem(KEY);
+    } else {
+      localStorage.setItem(KEY, next);
+    }
+    apply(next);
+  });
+
+  system.addEventListener('change', () => {
+    if (!localStorage.getItem(KEY)) apply(system.matches ? 'dark' : 'light');
+  });
+</script>

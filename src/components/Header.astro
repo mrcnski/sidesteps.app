@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import ThemeToggle from './ThemeToggle.astro';
 
 const NAV = [
   { href: '/', label: 'Draw' },
@@ -16,7 +17,7 @@ const isActive = (href: string) =>
 ---
 
 <header class="relative z-20">
-  <div class="container-page flex h-18 items-center justify-between gap-4">
+  <div class="container-page flex h-18 items-center gap-1 sm:gap-4">
     <a
       href="/"
       class="group flex items-center gap-2.5 rounded-md"
@@ -24,18 +25,18 @@ const isActive = (href: string) =>
     >
       <Logo class="size-8 transition-transform duration-300 ease-out-soft group-hover:-rotate-6" />
       <!-- On phones, the logo alone leaves room for the full nav. -->
-      <span class="font-display text-[1.375rem] font-semibold tracking-tight text-ink max-[28rem]:sr-only">
+      <span class="font-display text-[1.375rem] font-semibold tracking-tight text-ink max-[30rem]:sr-only">
         Sidesteps
       </span>
     </a>
-    <nav aria-label="Main">
-      <ul class="flex items-center gap-0.5 text-[0.9375rem] sm:gap-1">
+    <nav aria-label="Main" class="ml-auto">
+      <ul class="flex items-center gap-0.5 text-[0.9375rem] max-[23rem]:gap-0 max-[23rem]:text-sm sm:gap-1">
         {NAV.map(({ href, label }) => (
           <li class:list={[href === '/' && 'max-sm:hidden']}>
             <a
               href={href}
               class:list={[
-                'relative flex items-center gap-1.5 rounded-full px-2.5 py-1.5 font-medium transition-colors sm:px-3.5',
+                'relative flex items-center gap-1.5 rounded-full px-2.5 py-1.5 font-medium transition-colors max-[23rem]:px-2 sm:px-3.5',
                 isActive(href)
                   ? 'bg-paper-deep text-ink'
                   : 'text-ink-soft hover:text-ink',
@@ -54,6 +55,7 @@ const isActive = (href: string) =>
         ))}
       </ul>
     </nav>
+    <ThemeToggle />
   </div>
 </header>
 

@@ -30,16 +30,20 @@ const ogImage = new URL('/og.png', Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta
-      name="theme-color"
-      content="#f2f1ec"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#1a1a1a"
-      media="(prefers-color-scheme: dark)"
-    />
+    <meta name="theme-color" content="#f2f1ec" />
+    <!-- Before first paint, so the page never flashes the wrong theme.
+         ThemeToggle.astro owns the rest of the theme logic. -->
+    <script is:inline>
+      {
+        const saved = localStorage.getItem('sidesteps:theme');
+        const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved ?? (dark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute('content', theme === 'dark' ? '#1a1a1a' : '#f2f1ec');
+      }
+    </script>
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Sidesteps" />
     <meta property="og:title" content={fullTitle} />

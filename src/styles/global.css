@@ -7,10 +7,13 @@
 
 /* ---------------------------------------------------------------------------
  * Palette: Nimbus, a slightly retro theme, in light ("Nimbus day") and dark
- * variants that follow the system setting. Components refer to these through
- * the Tailwind theme below. Card faces are tinted with their suit color; the
- * `--tint-*` strengths set how much.
+ * variants. Base.astro sets `data-theme` on <html> from the saved choice or
+ * the system setting. Components refer to these through the Tailwind theme
+ * below. Card faces are tinted with their suit color; the `--tint-*`
+ * strengths set how much.
  * ------------------------------------------------------------------------- */
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 :root {
   color-scheme: light;
@@ -57,51 +60,49 @@
   --highlight: hsl(0 0% 100% / 0.5);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
+:root[data-theme='dark'] {
+  color-scheme: dark;
 
-    --paper: #1a1a1a;
-    --paper-deep: #212121;
-    --surface: #262626;
-    --ink: #d8dcd8;
-    --ink-soft: #aab0ab;
-    --ink-faint: #858585;
-    --line: #353535;
-    --line-strong: #454545;
+  --paper: #1a1a1a;
+  --paper-deep: #212121;
+  --surface: #262626;
+  --ink: #d8dcd8;
+  --ink-soft: #aab0ab;
+  --ink-faint: #858585;
+  --line: #353535;
+  --line-strong: #454545;
 
-    --accent: #eaaa0c;
-    --accent-hover: #f5bd2e;
-    --accent-ink: #1a1a1a;
-    --accent-soft: #2b1147;
-    --pop: #47112b;
+  --accent: #eaaa0c;
+  --accent-hover: #f5bd2e;
+  --accent-ink: #1a1a1a;
+  --accent-soft: #2b1147;
+  --pop: #47112b;
 
-    --back: #112b47;
-    --back-deep: #0c2038;
-    --back-line: #70a5e1;
+  --back: #112b47;
+  --back-deep: #0c2038;
+  --back-line: #70a5e1;
 
-    --card-base: #161616;
-    --card-text: #eef0ec;
-    --tint-face: 16%;
-    --tint-edge: 35%;
-    --tint-text: 30%;
+  --card-base: #161616;
+  --card-text: #eef0ec;
+  --tint-face: 16%;
+  --tint-edge: 35%;
+  --tint-text: 30%;
 
-    --suit-reframe: #8f8dda;
-    --suit-subtract: #2fb08d;
-    --suit-structure: #70a5e1;
-    --suit-act: #e06a57;
-    --suit-pace: #ba86d2;
-    --suit-feel: #dba3a3;
-    --suit-resource: #eaaa0c;
+  --suit-reframe: #8f8dda;
+  --suit-subtract: #2fb08d;
+  --suit-structure: #70a5e1;
+  --suit-act: #e06a57;
+  --suit-pace: #ba86d2;
+  --suit-feel: #dba3a3;
+  --suit-resource: #eaaa0c;
 
-    --shadow-color: 0 0% 0%;
-    --card-shadow:
-      0 1px 1px hsl(var(--shadow-color) / 0.3),
-      0 8px 16px -4px hsl(var(--shadow-color) / 0.4),
-      0 24px 48px -12px hsl(var(--shadow-color) / 0.6);
-    --card-shadow-sm: 0 2px 6px -1px hsl(var(--shadow-color) / 0.4);
-    --highlight: hsl(0 0% 100% / 0.12);
-  }
+  --shadow-color: 0 0% 0%;
+  --card-shadow:
+    0 1px 1px hsl(var(--shadow-color) / 0.3),
+    0 8px 16px -4px hsl(var(--shadow-color) / 0.4),
+    0 24px 48px -12px hsl(var(--shadow-color) / 0.6);
+  --card-shadow-sm: 0 2px 6px -1px hsl(var(--shadow-color) / 0.4);
+  --highlight: hsl(0 0% 100% / 0.12);
 }
 
 [data-suit='reframe'] {
