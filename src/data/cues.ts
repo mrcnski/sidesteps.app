@@ -130,6 +130,10 @@ const DEFS: CueDef[] = [
   ['Learn from history', 'resource'],
   ['Fake it', 'act'],
   ['¿Por qué no los dos?', 'reframe'],
+  ['Work or play?', 'reframe'],
+  ['Divide and conquer', 'structure'],
+  ['Can you automate it?', 'resource'],
+  ['What needs to be said?', 'feel'],
 ];
 
 export const CUES: Cue[] = DEFS.map(([text, suit], i) => ({
